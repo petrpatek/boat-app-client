@@ -9,6 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import io from 'socket.io-client';
 
+import cfg from '../services/raspberry/configuration.cfg.json';
+
 
 const styles = {
   card: {
@@ -30,17 +32,24 @@ class VoltMeter extends Component {
     };
     this.setValue = this.setValue.bind(this);
   }
-  setValue(value) {
-    this.setState({ value });
-  }
+
   componentWillMount() {
-    this.socket = io('http://smartboat.ddns.net:4444/voltmeter');
-    this.socket.on('voltmeter', (colt) => {
-      this.setValue(colt.value);
+    this.socket = io.connect('http://smartboat.ddns.net:4444');
+    this.socket.on('connect', () => {
+      this.socket.emit('authentication', { username: cfg.api.username, password: cfg.api.password });
+      this.socket.on('authenticated', () => {
+        console.log('Authenticated');
+        this.socket.on('voltmeter', (data) => {
+          this.setValue(data.value);
+        });
+      });
     });
   }
   componentWillUnmount() {
     this.socket.close();
+  }
+  setValue(value) {
+    this.setState({ value });
   }
   render() {
     return (
