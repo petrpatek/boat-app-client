@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import HomeIcon from '@material-ui/icons/Home';
+
+
 import { withStyles } from '@material-ui/core/styles';
 
+import NavLink from "./NavLink"
 const styles = () => ({
   drawerPaper: {
     position: 'relative',
@@ -23,31 +28,19 @@ const SideMenu = (props) => {
         paper: classes.drawerPaper,
       }}
     >
-      {props.accountSection}
+      <List>
+        <NavLink link="dock" text="Dock Mode" icon={<HomeIcon/>} />
+        <NavLink link="/drive" text="Drive Mode"/>
+      </List>
       <Divider />
-
-      {props.linkSection}
     </Drawer>
   );
 };
 
 SideMenu.propTypes = {
-  classes: PropTypes.object.isRequired,
-  accountSection: PropTypes.array,
-  linkSection: PropTypes.array,
+  classes: PropTypes.object.isRequired
 
 };
-SideMenu.defaultProps = {
-  accountSection: [
-    <Typography variant="body2" key="noACC">
-    NoAccount
-    </Typography>
-  ],
-  linkSection: [
-    <Typography variant="body2" key="NOLink">
-    NoLinks
-    </Typography>
-  ],
-};
+
 
 export default withStyles(styles)(SideMenu);
