@@ -9,7 +9,8 @@ import HomeIcon from '@material-ui/icons/Home';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import NavLink from "./NavLink"
+import NavLink from './NavLink';
+
 const styles = () => ({
   drawerPaper: {
     position: 'relative',
@@ -29,8 +30,8 @@ const SideMenu = (props) => {
       }}
     >
       <List>
-        <NavLink link="dock" text="Dock Mode" icon={<HomeIcon/>} />
-        <NavLink link="/drive" text="Drive Mode"/>
+        <NavLink link="dock" text="Dock Mode" icon={<HomeIcon />} />
+        <NavLink link="/drive" text="Drive Mode" />
       </List>
       <Divider />
     </Drawer>

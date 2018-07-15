@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SideMenu from './components/SideMenu';
 import Navbar from './components/Navbar';
 import MainContent from './components/MainContent';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/DockMode';
+import DriveMode from './pages/DriveMode';
 
 import './app.css';
 
@@ -26,6 +27,7 @@ const App = () => (
         <SideMenu />
         <MainContent>
           <Route path="/dock" component={HomePage} />
+          <Route path="/drive" component={DriveMode} />
         </MainContent>
       </div>
     </div>
